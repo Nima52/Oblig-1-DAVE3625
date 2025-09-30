@@ -102,9 +102,9 @@ Are there any outliers?
 
 print("\n Executing seventh task...")
 
-sns.set(style="ggplot")
+sns.set_theme(style="ggplot")
 
-fig, axes = plt.subplot(2, 1, figsize=(10, 8))
+fig, axes = plt.subplots(2, 1, figsize=(10, 8))
 
 #Boxplot for Subtype_1
 sns.boxplot(x="Item_MRP", data=SubType_1, ax=axes[0])
