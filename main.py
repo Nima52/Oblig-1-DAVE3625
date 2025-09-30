@@ -77,3 +77,54 @@ print("\n Executing fifth task...")
 Grc_new_df = Grc_df.drop(Grc_df.columns[[0, 6]], axis=1)
 print(f"Columns dropped. New DataFrame Grc_new_df created with shape: {Grc_new_df.shape}")
 
+'''
+6. Using different Supermarket type listed in the column Outlet_Type create two different
+Dataframes from Grc_new_df. Name these Dataframes as Subtype_1 and Subtype_2. 
+'''
+print("\n Executing sixth task...")
+
+#Finn Ulike Outlet_Type
+unique_outlets = Grc_df['Outlet_type'].unique()
+print(f"Unique Outlet Types:{unique_outlets}")
+
+#Opprett to Dataframes
+SubType_1 = Grc_new_df[Grc_new_df['Outlet_Type']== unique_outlets[0]]
+SubType_2 = Grc_new_df[Grc_new_df['Outlet_Type']== unique_outlets[1]]
+
+print(f"Subtype_1 shape: {SubType_1.shape}")
+print(f"Subtype_2 shape: {SubType_2.shape}")
+
+'''
+7. Using ("ggplot style") create a (2,1) subplot of a box plot showing 5-point summary of 
+the column Item_MRP for Subtype_1 and Subtype_2. Which Outlet Type has a higher median MRP?
+Are there any outliers?
+'''
+
+print("\n Executing seventh task...")
+
+sns.set(style="ggplot")
+
+fig, axes = plt.subplot(2, 1, figsize=(10, 8))
+
+#Boxplot for Subtype_1
+sns.boxplot(x="Item_MRP", data=SubType_1, ax=axes[0])
+axes[0].set_title(f"Item_MRP Distrubtion for {unique_outlets[0]}")
+
+#Boxplot for Subtype_2
+sns.boxplot(x="Item_MRP", data=SubType_2, ax=axes[1])
+axes[1].set_title(f"Item_MRP Distrubtion for {unique_outlets[1]}")
+
+plt.tight_layout()
+plt.show()
+
+#Median sjekk
+median_1 = SubType_1["Item_MRP"].median()
+median_2 = SubType_2["Item_MRP"].median()
+
+print(f"Median Item_MRP for {unique_outlets[0]}:{median_1}")
+print(f"Median Item_MRP for {unique_outlets[1]}:{median_2}")
+
+if median_1 > median_2:
+    print(f"{unique_outlets[0]} has a higher median Item_MRP.")
+else:
+    print(f"{unique_outlets[1]} has a higher median Item_MRP.")
